@@ -1,5 +1,7 @@
 package gdi;
 
+import java.util.*;
+
 public class Sorting {
 
     void insertionsort(int[] array) {
@@ -49,4 +51,40 @@ public class Sorting {
         qicksort2(array, left+1, to);
     }
     
+    public static void main(String[] args) {
+        java.util.List<int[]> data = new ArrayList<int[]>();
+        data.add(new int[] {1,2,3,4,5,6,7,8});
+        data.add(new int[] {8,7,6,5,4,3,2,1});
+        data.add(new int[] {4,3,6,5,8,9,2,1});
+        int index = 0;
+        for (int[] array : data) {
+            new Sorting().quicksort(array);
+            if (!sorted(array)) {
+                System.out.println("Quicksort hat einen Fehler für Beispiel " + index + "!");
+            }
+            index++;
+        }
+        Random gen = new Random();
+        for (int i = 0; i < 100; i++) {
+            int[] array = new int[gen.nextInt(20) + 5];
+            for (int j = 0; j < array.length; j++) {
+                array[j] = gen.nextInt();
+            }
+            new Sorting().quicksort(array);
+            if (!sorted(array)) {
+                System.out.println("Quicksort hat einen Fehler!");
+            }
+        }
+        System.out.println("Test fertig!");
+    }
+
+    static boolean sorted(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
