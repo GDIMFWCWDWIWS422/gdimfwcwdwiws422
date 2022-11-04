@@ -51,6 +51,44 @@ public class Sorting {
         qicksort2(array, left+1, to);
     }
     
+    public void mergesort(int[] array) {
+        mergesort2(array, 0, array.length - 1);
+    }
+    public void mergesort2(int[] array, int from, int to) {
+        if(to-from<=0) {
+            return;
+        }
+        int mitte = (from + to) / 2;
+        mergesort2(array, from, mitte);
+        mergesort2(array, mitte + 1, to);
+        int left = from;
+        int right = mitte + 1;
+        int[] tempArray = new int[array.length];
+        int index = left;
+        while(left <= mitte && right <= to) {
+            if(array[left] < array[right]) {
+                tempArray[index] = array[left];
+                left++;
+                index++;
+            }else {
+                tempArray[index] = array[right];
+                right++;
+                index++;
+            }
+        }
+        while(left <= mitte) {
+            tempArray[index] = array[left];
+            left++;
+            index++;
+        }
+        while(right <= to) {
+            tempArray[index] = array[right];
+            right++;
+            index++;
+        }
+        for(int i = from; i <= to; i++) array[i] = tempArray[i];
+    }
+    
     public static void main(String[] args) {
         java.util.List<int[]> data = new ArrayList<int[]>();
         data.add(new int[] {1,2,3,4,5,6,7,8});
